@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnShowLast = document.getElementById("showLast");
   btnShowLast.addEventListener("click", function showLastHandler(e) {
     showLastItem();
+
   });
 
   document
@@ -89,6 +90,8 @@ function addRecordHandler() {
   }
 
   addRecord(name, salary);
+  // name.value = '';
+  // salary.value = '';
 }
 
 function addRecord(name, salary) {
@@ -97,6 +100,8 @@ function addRecord(name, salary) {
 
   salary_data[id] = newItem;
   initializeChart(salary_data);
+  document.getElementById("name").value = '';
+  document.getElementById("salary").value = '';
 }
 
 function getRecord(name, salary) {
@@ -119,8 +124,20 @@ const showLastItem = function () {
     lastKey = key;
   };
   const lastItem = items[lastKey];
-  const lastRecord = getRecord(lastItem.name, lastItem.salary);
-  displayLastItemDialog(lastRecord);
+  // const lastRecord = getRecord(lastItem.name, lastItem.salary);
+  // displayLastItemDialog(lastRecord);
+  const cardContainer = document.getElementById('card-container');
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <div class="card" style="width: 18rem;">
+      <img src="images/favicon.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h2 class="card-title">Last Name : ${lastItem.name}</h2>
+        <h2 class="card-title">Salary : ${lastItem.salary}</h2>        
+      </div>
+    </div>
+  `
+  cardContainer.appendChild(div);
 };
 
 const loadFirebaseData = function (resHandler) {
